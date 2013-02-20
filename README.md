@@ -16,6 +16,13 @@ Goals
 - Demonstrate how semver can be applied better when separate components
 are versioned like separate components.
 
+Instructions
+------------
+
+    git clone https://github.com/drupal-fracture/split-scripts.git
+    cd split-scripts
+    bundle install --path=vendor
+    bundle exec rake split_modules
 
 Roadmap
 -------

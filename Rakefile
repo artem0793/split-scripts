@@ -14,13 +14,15 @@ task :split_projects do
     Dir.chdir("#{current_dir}/drupal") {
       system "git subtree split -P core/modules/#{module_name} -b fracture-#{module_name}"
     }
+    require 'inifile'
+    module_ini = IniFile.load("#{current_dir}/drupal/core/modules/#{module_name}/#{module_name}.info")
     module_path = "#{current_dir}/modules/#{module_name}"
     Dir::mkdir(module_path) unless File.exists?(module_path)
     Dir.chdir(module_path) {
       system "git init"
       system "git fetch ../../drupal fracture-#{module_name}"
       system "git checkout -b master FETCH_HEAD"
-      system "hub create drupal-fracture/#{module_name}"
+      system "hub create drupal-fracture/#{module_name} -d '#{ini['global']['description']}'"
       system "git push -u origin master"
     }
   end

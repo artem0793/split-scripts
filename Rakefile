@@ -24,6 +24,18 @@ task :split_projects do
       system "git checkout -b master FETCH_HEAD"
       system "hub create drupal-fracture/#{module_name} -d '#{ini['global']['description']}'"
       system "git push -u origin master"
+      json = File.new("composer.json", "w")
+      json.puts <<-EOF
+{
+    "name": "drupal-fracture/#{module_name}",
+    "version": "8.0.0",
+    "type": "drupal-module",
+    "require": {
+        "composer/installers": "*"
+    }
+}
+      EOF
+      json.close
     }
   end
 end

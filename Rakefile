@@ -3,6 +3,15 @@ task :split_projects do
   current_dir = File.dirname(File.expand_path(__FILE__))
   core_modules = Array.new
 
+  # Get stale drupal git commit
+  #
+  # Pull repo changes
+  #
+  # Get current drupal git commit
+  #
+  # * Before recompiling each project, check whether changes between old and new.
+  # * Example: git diff 9e49307 5a8a967 core/modules/options
+
   project_types = ['modules', 'themes', 'profiles']
 
   project_types.each do |project_type|
